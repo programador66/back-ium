@@ -40,7 +40,7 @@ class UserService
                 'email'        => $email,
                 'name'         => $name,
                 'password'     => \Hash::make($password),
-                'tipo_usuario' => "C"
+                'tipo_usuario' => 'C'
             ]);
             
             $user->token = $user->createToken($user->email)->accessToken;
