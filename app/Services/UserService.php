@@ -37,9 +37,10 @@ class UserService
         try{
 
             $user =  User::create([
-                'email'     => $email,
-                'name'      => $name,
-                'password'  => \Hash::make($password),
+                'email'        => $email,
+                'name'         => $name,
+                'password'     => \Hash::make($password),
+                'tipo_usuario' => "C"
             ]);
             
             $user->token = $user->createToken($user->email)->accessToken;
