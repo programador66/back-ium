@@ -18,4 +18,8 @@ Route::prefix('cliente')->group( function(){
     Route::post('/login', 'UserController@login');
     Route::get('/usuario', 'UserController@getUser');
 });
+
+Route::prefix('candidato')->group( function(){
+    Route::post('/cadastro','CandidatoController@newCandidato');
+});
 // Route::middleware('auth:api')->get('/usuario', 'UserController@getUser');

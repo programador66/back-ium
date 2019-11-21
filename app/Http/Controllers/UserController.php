@@ -33,7 +33,7 @@ class UserController extends Controller
             return implode(" ", $validacao->errors()->all());
         }
         
-        $response = $this->userService->newUser($request['email'], $request['password'], $request['name']);
+        $response = $this->userService->newUser($request['email'], $request['password'], $request['name'], 'C');
         
         if (!$response['success']) {
             return Response()->Json([
@@ -89,7 +89,7 @@ class UserController extends Controller
             return Response()->Json([
                 'success' => false,
                 'message' => 'Usuário ou senha inválido!'
-           ],200);
+           ],400);
         }
     }
 }

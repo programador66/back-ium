@@ -10,7 +10,9 @@ class Candidato extends Model
     protected $fillable = [
         'cpf',
         'endereco',
-        'user_id'
+        'user_id',
+        'telefone',
+        'sexo'
     ];
     
     public $timestamps = false;
