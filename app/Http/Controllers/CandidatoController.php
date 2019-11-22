@@ -71,9 +71,9 @@ class CandidatoController extends Controller
 
     }
 
-    public function getCurriculo()
+    public function getCurriculo(Request $request)
     {
-        $response = $this->candidatoService->getCurriculo();
+        $response = $this->candidatoService->getCurriculo($request['id_candidato']);
         
         if (!$response['success']) {
             return Response()->Json([

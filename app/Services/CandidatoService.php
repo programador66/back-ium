@@ -2,11 +2,9 @@
 
 namespace App\Services;
 
-use App\Candidato;
-use App\FormacaoEscolar;
-use App\User;
+use App\Models\Candidato;
+use App\Models\User;
 use Error;
-use Illuminate\Support\Facades\DB;
 
 class CandidatoService
 {
@@ -20,23 +18,17 @@ class CandidatoService
      */
     private $userService;
 
-    /**
-     *  @var Formacao
-     */
-    private $formacaoService;
-
-
-    public function __construct(User $userService, Candidato $candidatoService, FormacaoEscolar $formacaoService)
+    public function __construct(User $userService, Candidato $candidatoService)
     {
         $this->userService = $userService;
         $this->candidatoService = $candidatoService;
-        $this->formacaoService = $formacaoService;
+       
     }
 
 
     /**
      * @author Caio César
-     * @date 01/11/2019
+     * @date 21/11/2019
      * @return novo candidato
      */
     public function newCandidato(String $cpf, String $sexo, String $telefone, String $endereco,$id_user): array
@@ -70,54 +62,19 @@ class CandidatoService
 
     }
     
+    
     /**
      * @author Caio César
-     * @date 01/11/2019
-     * @return novo candidato
-     */
-    public function newFormacao(array $dados): array
-    {   
-        try{
-            DB::beginTransaction();
-
-            foreach ($dados as $formacao){
-                $this->formacaoService->create([
-                    'curso'          => $formacao['curso'],
-                    'instituicao'    => $formacao['instituicao'],
-                    'data_inicio'    => $formacao['data_inicio'],
-                    'data_conclusao' => $formacao['data_conclusao'],
-                    'candidato_id'   => $formacao['id_user']
-                ]);
-            }
-            
-            DB::commit();
-            return [
-                'success' => true,
-                'message' => 'formações cadastrado com sucesso!'
-            ];
-
-        } catch (\Throwable $exception) {
-            DB::rollBack();
-            return [
-                'success' => false,
-                'error'   => $exception->getMessage(),
-                'message' => 'Erro ao inserir os dados do usuário'   
-            ];
-        }
-
-    }
-
-
-    /**
-     * @author Caio César
-     * @date 01/11/2019
+     * @date 22/11/2019
      * @return  candidato
      */
-    public function getCurriculo(): array
+    public function getCurriculo(int $id_candidato): array
     {   
         try{
             
-            $response = $this->candidatoService->find(1)->with('formacaoEscolar')->get();
+            $response = $this->candidatoService->findOrFail($id_candidato)
+                ->with('formacaoEscolar')
+                ->get();
             
             return [
                 'success' => true,

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\FormacaoEscolar;
-use App\User;
+use App\Models\FormacaoEscolar;
+use App\Models\User;
 use Error;
 
 class UserService
@@ -43,7 +43,7 @@ class UserService
     {   
         try{
 
-            $user =  User::create([
+            $user =  $this->userService->create([
                 'email'        => $email,
                 'name'         => $name,
                 'password'     => \Hash::make($password),
