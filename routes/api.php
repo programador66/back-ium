@@ -21,5 +21,7 @@ Route::prefix('cliente')->group( function(){
 
 Route::prefix('candidato')->group( function(){
     Route::post('/cadastro','CandidatoController@newCandidato');
+    Route::post('/formacao', 'CandidatoController@newFormacao');
+    Route::get('/getCurriculo', 'CandidatoController@getCurriculo');
 });
 // Route::middleware('auth:api')->get('/usuario', 'UserController@getUser');

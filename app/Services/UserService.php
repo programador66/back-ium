@@ -73,40 +73,5 @@ class UserService
     }
     
 
-    
-    /**
-     * @author Caio César
-     * @date 11/11/2019
-     * @return nova formação escolar
-     */
-    public function formacaoEscolar(String $cpf, String $curso, String $instituicao, String $data_inicio, String $data_conclusao): array
-    { 
-        try {
-
-            $fk_user = $this->userService
-                ->where('cpf',$cpf)
-                ->get();
-
-            dd($fk_user);    
-
-            $formacaoCreated = $this->formacaoEscolar->create([
-                'cpf'             => $cpf,
-                'curso'           => $curso,
-                'instituicao'     => $instituicao,
-                'data_inicio'     => $data_inicio,
-                'data_conclusao'  => $data_conclusao,
-                'candidato_id'    => 1
-            ]);
-
-            return []; 
-        } catch (\Throwable $exception) {
-            return [
-                'success' => false,
-                'error'   => $exception->getMessage()  
-            ]; 
-        }
-      
-    }    
-
 }
  

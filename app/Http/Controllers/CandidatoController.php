@@ -21,15 +21,17 @@ class CandidatoController extends Controller
 
     public function newCandidato(Request $request)
     {
-        // $validacao =  Validator::make($request->all(), [
-        //     'name' => ['required'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ]);
+        $validacao =  Validator::make($request->all(), [
+            'cpf' => ['required'],
+            'endereco' => ['required', 'string'],
+            'sexo' => ['required'],
+            'telefone' => ['required'],
+            'id_user'  => ['required']
+        ]);
         
-        // if ($validacao->fails()) {
-        //     return implode(" ", $validacao->errors()->all());
-        // }
+        if ($validacao->fails()) {
+            return implode(" ", $validacao->errors()->all());
+        }
         
         $response = $this->candidatoService->newCandidato($request['cpf'], $request['sexo'], $request['telefone'],$request['endereco'],$request['id_user']);
         
@@ -49,5 +51,40 @@ class CandidatoController extends Controller
 
     }
 
-    
+    public function newFormacao(Request $request)
+    {
+
+        $response = $this->candidatoService->newformacao($request['formacao']);
+        
+        if (!$response['success']) {
+            return Response()->Json([
+                'success'   => false,
+                'error'     => $response['error'],
+                'message'   => $response['message']
+            ],400); 
+        }
+        
+        return Response()->Json([
+            'success' => true,
+            'message' => $response['message']
+        ],201);
+
+    }
+
+    public function getCurriculo()
+    {
+        $response = $this->candidatoService->getCurriculo();
+        
+        if (!$response['success']) {
+            return Response()->Json([
+                'success'   => false,
+                'error'     => $response['error']
+            ],400); 
+        }
+        
+        return Response()->Json([
+            'success' => true,
+            'data' => $response['data']
+        ],200); 
+    }
 }
