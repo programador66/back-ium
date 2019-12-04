@@ -73,9 +73,9 @@ class CandidatoService
         try{
             
             $response = $this->candidatoService->findOrFail($id_candidato)
-                ->with('formacaoEscolar')
+                ->with(['formacaoEscolar','certificados'])
                 ->get();
-            
+
             return [
                 'success' => true,
                 'data' => $response

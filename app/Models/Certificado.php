@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certificado extends Model
 {
-    protected $timestamps = false;
+    public $timestamps = false;
+    protected $fillable = ['emissor', 'descricao', 'data','candidato_id'];
 
     public function candidato()
     {
