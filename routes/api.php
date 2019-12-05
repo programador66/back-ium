@@ -16,7 +16,7 @@
 Route::prefix('cliente')->group( function(){
     Route::post('/cadastro','UserController@newUser');
     Route::post('/login', 'UserController@login');
-    Route::get('/usuario', 'UserController@getUser');
+    Route::middleware('auth:api')->get('/usuario', 'UserController@getUser');
 });
 
 Route::prefix('candidato')->group( function(){
@@ -25,4 +25,3 @@ Route::prefix('candidato')->group( function(){
     Route::post('/certificado', 'CertificadoController@newCertificado');
     Route::post('/getCurriculo', 'CandidatoController@getCurriculo');
 });
-// Route::middleware('auth:api')->get('/usuario', 'UserController@getUser');
