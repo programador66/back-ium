@@ -89,7 +89,7 @@ class UserController extends Controller
             return Response()->Json([
                 'success' => false,
                 'message' => 'Usuário ou senha inválido!'
-           ],400);
+           ],200);
         }
     }
 }
