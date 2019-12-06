@@ -44,7 +44,9 @@ class CandidatoService
             'user_id'    => $user->id
         ];
 
-        $att = $this->candidatoService->where('cpf', $cpf)->get();
+        $att = $this->candidatoService
+            ->where('user_id', $user->id)
+            ->get();
 
         $response = (collect($att)->count() == 0) ? self::newCandidato($candidato) : self::updateCandidato($candidato);
 
@@ -64,6 +66,7 @@ class CandidatoService
 
             $candidatoUpdate = $this->candidatoService->find($candidato['user_id']);
 
+            $candidatoUpdate->cpf = $candidato['cpf'];
             $candidatoUpdate->endereco = $candidato['endereco'];
             $candidatoUpdate->telefone = $candidato['telefone'];
             $candidatoUpdate->sexo = $candidato['sexo'];
