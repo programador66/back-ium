@@ -21,6 +21,7 @@ class CandidatoController extends Controller
 
     public function newCandidato(Request $request)
     {
+//        print_r($request->all());exit();
         $validacao =  Validator::make($request->all(), [
             'cpf' => ['required'],
             'endereco' => ['required', 'string'],
@@ -33,7 +34,7 @@ class CandidatoController extends Controller
             return implode(" ", $validacao->errors()->all());
         }
         
-        $response = $this->candidatoService->newCandidato($request['cpf'], $request['sexo'], $request['telefone'],$request['endereco'],$request['id_user']);
+        $response = $this->candidatoService->candidato($request['cpf'], $request['sexo'], $request['telefone'],$request['endereco'],$request['id_user']);
         
         if (!$response['success']) {
             return Response()->Json([
