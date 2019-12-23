@@ -17,18 +17,18 @@ class FormacaoEscolarService
 
     public function __construct(FormacaoEscolar $formacaoService)
     {
-       
+
         $this->formacaoService = $formacaoService;
     }
 
-  
+
     /**
      * @author Caio César
      * @date 22/11/2019
      * @return nova formação
      */
     public function newFormacao(array $dados): array
-    {   
+    {
         try{
             DB::beginTransaction();
 
@@ -36,12 +36,12 @@ class FormacaoEscolarService
                 $this->formacaoService->create([
                     'curso'          => $formacao['curso'],
                     'instituicao'    => $formacao['instituicao'],
-                    'data_inicio'    => $formacao['data_inicio'],
-                    'data_conclusao' => $formacao['data_conclusao'],
+                    'data_inicio'    => $formacao['inicio'],
+                    'data_conclusao' => $formacao['conclusao'],
                     'candidato_id'   => $formacao['id_user']
                 ]);
             }
-            
+
             DB::commit();
             return [
                 'success' => true,
@@ -53,7 +53,7 @@ class FormacaoEscolarService
             return [
                 'success' => false,
                 'error'   => $exception->getMessage(),
-                'message' => 'Erro ao inserir os dados do usuário'   
+                'message' => 'Erro ao inserir os dados do usuário'
             ];
         }
 
@@ -61,4 +61,3 @@ class FormacaoEscolarService
 
 
 }
- 

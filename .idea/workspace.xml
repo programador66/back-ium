@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4b7da13-8990-4209-8c43-26538c6a45df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Services/CandidatoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/CandidatoService.php" afterDir="false" />
-    </list>
+    <list default="true" id="c4b7da13-8990-4209-8c43-26538c6a45df" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +195,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="5">
+  <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="2509" />
     <option name="width" value="1331" />
     <option name="height" value="1080" />
@@ -305,8 +303,7 @@
     <option name="totallyTimeSpent" value="24763000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2509" y="0" width="1331" height="1080" extended-state="5" />
-    <editor active="true" />
+    <frame x="2509" y="0" width="1331" height="1080" extended-state="4" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26614785" />
