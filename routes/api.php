@@ -24,4 +24,5 @@ Route::prefix('candidato')->group( function(){
     Route::post('/formacao', 'FormacaoEscolarController@newFormacao');
     Route::post('/certificado', 'CertificadoController@newCertificado');
     Route::post('/getCurriculo', 'CandidatoController@getCurriculo');
+    Route::post('/experiencia-profissional', 'ExperienciaProfissionalController@newExperienciaProfissional');
 });
