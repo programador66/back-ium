@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidato extends Model
-{   
+{
     protected $primaryKey = "id";
     protected $fillable = [
         'cpf',
@@ -14,20 +14,20 @@ class Candidato extends Model
         'telefone',
         'sexo'
     ];
-    
+
     public $timestamps = false;
-    
+
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
     public function formacaoEscolar()
-    { 
+    {
        return $this->hasMany(FormacaoEscolar::class, 'candidato_id','id');
     }
-    
-    public function experienciaProficional()
+
+    public function experienciaProfissional()
     {
         return $this->hasMany(ExperienciaProfissional::class, 'candidato_id', 'id');
     }

@@ -22,7 +22,7 @@ class CandidatoService
     {
         $this->userService = $userService;
         $this->candidatoService = $candidatoService;
-       
+
     }
 
 
@@ -96,7 +96,7 @@ class CandidatoService
      * @return novo candidato
      */
     public function newCandidato($candidato): array
-    {   
+    {
         try{
 
 
@@ -114,24 +114,24 @@ class CandidatoService
             return [
                 'success' => false,
                 'error'   => $exception->getMessage(),
-                'message' => 'Erro ao inserir os dados do usuário'   
+                'message' => 'Erro ao inserir os dados do usuário'
             ];
         }
 
     }
-    
-    
+
+
     /**
      * @author Caio César
      * @date 22/11/2019
      * @return  candidato
      */
     public function getCurriculo(int $id_candidato): array
-    {   
+    {
         try{
-            
+
             $response = $this->candidatoService->findOrFail($id_candidato)
-                ->with(['formacaoEscolar','certificados'])
+                ->with(['formacaoEscolar','certificados','experienciaProfissional'])
                 ->get();
 
             return [
@@ -140,14 +140,13 @@ class CandidatoService
             ];
 
         } catch (\Throwable $exception) {
-            
+
             return [
                 'success' => false,
-                'error'   => $exception->getMessage(), 
+                'error'   => $exception->getMessage(),
             ];
         }
 
     }
 
 }
- 
