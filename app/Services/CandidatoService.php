@@ -22,7 +22,7 @@ class CandidatoService
     {
         $this->userService = $userService;
         $this->candidatoService = $candidatoService;
-       
+
     }
 
 
@@ -44,7 +44,9 @@ class CandidatoService
             'user_id'    => $user->id
         ];
 
-        $att = $this->candidatoService->where('cpf', $cpf)->get();
+        $att = $this->candidatoService
+            ->where('user_id', $user->id)
+            ->get();
 
         $response = (collect($att)->count() == 0) ? self::newCandidato($candidato) : self::updateCandidato($candidato);
 
@@ -64,6 +66,7 @@ class CandidatoService
 
             $candidatoUpdate = $this->candidatoService->find($candidato['user_id']);
 
+            $candidatoUpdate->cpf = $candidato['cpf'];
             $candidatoUpdate->endereco = $candidato['endereco'];
             $candidatoUpdate->telefone = $candidato['telefone'];
             $candidatoUpdate->sexo = $candidato['sexo'];
@@ -93,7 +96,7 @@ class CandidatoService
      * @return novo candidato
      */
     public function newCandidato($candidato): array
-    {   
+    {
         try{
 
 
@@ -111,24 +114,24 @@ class CandidatoService
             return [
                 'success' => false,
                 'error'   => $exception->getMessage(),
-                'message' => 'Erro ao inserir os dados do usuário'   
+                'message' => 'Erro ao inserir os dados do usuário'
             ];
         }
 
     }
-    
-    
+
+
     /**
      * @author Caio César
      * @date 22/11/2019
      * @return  candidato
      */
     public function getCurriculo(int $id_candidato): array
-    {   
+    {
         try{
-            
+
             $response = $this->candidatoService->findOrFail($id_candidato)
-                ->with(['formacaoEscolar','certificados'])
+                ->with(['formacaoEscolar','certificados','experienciaProfissional'])
                 ->get();
 
             return [
@@ -137,14 +140,13 @@ class CandidatoService
             ];
 
         } catch (\Throwable $exception) {
-            
+
             return [
                 'success' => false,
-                'error'   => $exception->getMessage(), 
+                'error'   => $exception->getMessage(),
             ];
         }
 
     }
 
 }
- 

@@ -40,7 +40,7 @@ class CertificadoService
 
                 $this->certificado->create([
                     'emissor'       => $certificado['emissor'],
-                    'descricao'     => $certificado['descricao'],
+                    'descricao'     => $certificado['premio'],
                     'data'          => $certificado['data'],
                     'candidato_id'  => $certificado['id_user']
                 ]);
@@ -67,4 +67,3 @@ class CertificadoService
 
 
 }
- 

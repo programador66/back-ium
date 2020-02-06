@@ -8,7 +8,7 @@ use App\Services\CertificadoService;
 
 class CertificadoController extends Controller
 {
-    
+
     /**
     * @var CertificadoService
     */
@@ -21,17 +21,17 @@ class CertificadoController extends Controller
 
     public function newCertificado(Request $request)
     {
-//        dd($request->all());
-        $response = $this->certificadoService->newCertificado($request['certificado']);
-        
+//        print_r($request->all());exit();
+        $response = $this->certificadoService->newCertificado($request['certificacao']);
+
         if (!$response['success']) {
             return Response()->Json([
                 'success'   => false,
                 'error'     => $response['error'],
                 'message'   => $response['message']
-            ],400); 
+            ],400);
         }
-        
+
         return Response()->Json([
             'success' => true,
             'message' => $response['message']
