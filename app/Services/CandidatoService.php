@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Candidato;
 use App\Models\User;
 use Error;
+use mysql_xdevapi\Exception;
 
 class CandidatoService
 {

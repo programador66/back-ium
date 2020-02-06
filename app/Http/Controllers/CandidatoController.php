@@ -61,7 +61,7 @@ class CandidatoController extends Controller
             return Response()->Json([
                 'success'   => false,
                 'error'     => $response['error']
-            ],400);
+            ],200);
         }
 
         return Response()->Json([
