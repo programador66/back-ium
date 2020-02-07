@@ -12,13 +12,13 @@ class FormacaoEscolarService
     /**
      *  @var Formacao
      */
-    private $formacaoService;
+    private $formacao;
 
 
-    public function __construct(FormacaoEscolar $formacaoService)
+    public function __construct(FormacaoEscolar $formacao)
     {
 
-        $this->formacaoService = $formacaoService;
+        $this->formacao = $formacao;
     }
 
 
@@ -33,7 +33,7 @@ class FormacaoEscolarService
             DB::beginTransaction();
 
             foreach ($dados as $formacao){
-                $this->formacaoService->create([
+                $this->formacao->create([
                     'curso'          => $formacao['curso'],
                     'instituicao'    => $formacao['instituicao'],
                     'data_inicio'    => $formacao['inicio'],

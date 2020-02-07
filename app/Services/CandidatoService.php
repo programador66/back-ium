@@ -12,17 +12,17 @@ class CandidatoService
     /**
      *  @var Candidato
      */
-    private $candidatoService;
+    private $candidato;
 
     /**
-     *  @var Candidato
+     *  @var User
      */
-    private $userService;
+    private $user;
 
-    public function __construct(User $userService, Candidato $candidatoService)
+    public function __construct(User $user, Candidato $candidato)
     {
-        $this->userService = $userService;
-        $this->candidatoService = $candidatoService;
+        $this->user = $user;
+        $this->candidato = $candidato;
 
     }
 
@@ -35,7 +35,7 @@ class CandidatoService
     public function candidato(String $cpf, String $sexo, String $telefone, String $endereco,$id_user): array
     {
 
-        $user = $this->userService->findOrFail($id_user);
+        $user = $this->user->findOrFail($id_user);
 
         $candidato =  [
             'cpf'        => $cpf,
@@ -45,7 +45,7 @@ class CandidatoService
             'user_id'    => $user->id
         ];
 
-        $att = $this->candidatoService
+        $att = $this->candidato
             ->where('user_id', $user->id)
             ->get();
 
@@ -65,7 +65,7 @@ class CandidatoService
     {
         try{
 
-            $candidatoUpdate = $this->candidatoService->find($candidato['user_id']);
+            $candidatoUpdate = $this->candidato->find($candidato['user_id']);
 
             $candidatoUpdate->cpf = $candidato['cpf'];
             $candidatoUpdate->endereco = $candidato['endereco'];
@@ -101,7 +101,7 @@ class CandidatoService
         try{
 
 
-            $response = $this->candidatoService->create($candidato);
+            $response = $this->candidato->create($candidato);
 
 
             return [
@@ -131,9 +131,13 @@ class CandidatoService
     {
         try{
 
-            $response = $this->candidatoService->findOrFail($id_candidato)
+            $response = $this->candidato->where('user_id',$id_candidato)
                 ->with(['formacaoEscolar','certificados','experienciaProfissional'])
                 ->get();
+
+            if (!$response) {
+                throw new \Error('Nenhum curriculo encontrado!');
+            }
 
             return [
                 'success' => true,
@@ -151,3 +155,5 @@ class CandidatoService
     }
 
 }
+
+
