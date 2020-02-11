@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\FormacaoEscolar;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Integer;
 
 class FormacaoEscolarService
 {
@@ -59,5 +60,70 @@ class FormacaoEscolarService
 
     }
 
+    /**
+     * @author Caio César
+     * @date 11/02/2019
+     * @return array formação
+     */
+    public function updateFormacao(array $dados): array
+    {
+        try{
+            DB::beginTransaction();
+
+            $updateFormacao = $this->formacao->findOrFail($dados['id_curso']);
+            $updateFormacao->curso = $dados['curso'];
+            $updateFormacao->instituicao = $dados['instituicao'];
+            $updateFormacao->data_inicio = $dados['inicio'];
+            $updateFormacao->data_conclusao = $dados['conclusao'];
+
+            $updateFormacao->save();
+
+            DB::commit();
+            return [
+                'success' => true,
+                'message' => 'formação atualizada com sucesso!'
+            ];
+
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            return [
+                'success' => false,
+                'error'   => $exception->getMessage(),
+                'message' => 'Erro ao atualizar as informações'
+            ];
+        }
+
+    }
+
+    /**
+     * @author Caio César
+     * @date 11/02/2019
+     * @return  array com exclusão
+     */
+    public function deleteFormacao($id)
+    {
+        try{
+            DB::beginTransaction();
+
+            $deletaFormacao = $this->formacao->find($id);
+
+            $deletaFormacao->delete();
+
+            DB::commit();
+            return [
+                'success' => true,
+                'message' => 'formação deletada!'
+            ];
+
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            return [
+                'success' => false,
+                'error'   => $exception->getMessage(),
+                'message' => 'Erro ao deletar informações'
+            ];
+        }
+
+    }
 
 }
